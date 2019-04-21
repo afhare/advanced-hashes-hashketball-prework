@@ -160,7 +160,7 @@ def team_colors(team_name)
   colors = []
   game_hash.each do |location, details|
     details.each do |team, data|
-      if team_name == team
+      if data == team
         colors << game_hash[location][:colors]
       end
     end
@@ -168,7 +168,7 @@ def team_colors(team_name)
   colors
 end
 
-def team_names(game_hash)
+def team_names
   teams = []
   game_hash.each do |location, details|
     details.each do |item, value|
@@ -183,8 +183,10 @@ end
 def player_numbers (team_name)
   num_array = []
   game_hash.each do |location, details|
-    details[:players].each do |name, stats|
-      num_array << stats[:number]
+    if details[:team_name] = team_name
+      details[:players].each do |name, stats|
+        num_array << stats[:number]
+      end
     end
   end
   num_array
@@ -193,7 +195,7 @@ end
 def player_stats(player_name)
   game_hash.each do |location, details|
     details[:players].each do |name, stats|
-      if player_name = name
+      if player_name == name
         return stats
       end
     end
